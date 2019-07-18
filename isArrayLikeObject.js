@@ -25,6 +25,7 @@ import isObjectLike from './isObjectLike.js'
  * // => false
  */
 function isArrayLikeObject(value) {
+  //判断是否是类数组对象
   return isObjectLike(value) && isArrayLike(value)
 }
 

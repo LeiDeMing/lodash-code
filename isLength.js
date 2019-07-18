@@ -26,6 +26,7 @@ const MAX_SAFE_INTEGER = 9007199254740991
  * // => false
  */
 function isLength(value) {
+  //判断value类型为 number 且值不为0，并且小于等于系统最大值(MAX_SAFE_INTEGER)
   return typeof value == 'number' &&
     value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER
 }

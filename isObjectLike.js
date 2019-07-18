@@ -21,6 +21,7 @@
  * // => false
  */
 function isObjectLike(value) {
+  //判断value是否是不为空的对象
   return typeof value == 'object' && value !== null
 }
 

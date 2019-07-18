@@ -25,10 +25,15 @@ import last from './last.js'
  * // => [{ 'x': 2, 'y': 1 }]
  */
 function differenceWith(array, ...values) {
+  //last方法截取数组最后一位
   let comparator = last(values)
+
+  //如果是类数组对象 将comparator重置为 undefined
   if (isArrayLikeObject(comparator)) {
     comparator = undefined
   }
+
+  //
   return isArrayLikeObject(array)
     ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), undefined, comparator)
     : []
