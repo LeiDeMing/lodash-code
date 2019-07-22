@@ -17,7 +17,7 @@ import isObjectLike from './isObjectLike.js'
  * // => false
  */
 function isArguments(value) {
-  //若果是类对象，并且
+  //检测value是否是函数的内参（arguments）
   return isObjectLike(value) && getTag(value) == '[object Arguments]'
 }
 
