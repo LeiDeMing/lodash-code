@@ -23,17 +23,20 @@ function baseDifference(array, values, iteratee, comparator) {
   let isCommon = true
   const result = []
   const valuesLength = values.length
-
+  //数组长度为0，返回result
   if (!array.length) {
     return result
   }
+  //如果由iteratee，则过滤函数
   if (iteratee) {
     values = map(values, (value) => iteratee(value))
   }
+  //如果由comparator，将arrayIncludesWith函数赋值给includes，重写isCommon为true
   if (comparator) {
     includes = arrayIncludesWith
     isCommon = false
   }
+  //如果要被比较的数组大于合法数组长度，将cacheHas赋值给includes，isCommon重写为true
   else if (values.length >= LARGE_ARRAY_SIZE) {
     includes = cacheHas
     isCommon = false

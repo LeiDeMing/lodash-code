@@ -1,5 +1,5 @@
-import baseDifference from './.internal/baseDifference.js'
-import baseFlatten from './.internal/baseFlatten.js'
+import baseDifference from '../.internal/baseDifference.js'
+import baseFlatten from '../.internal/baseFlatten.js'
 import isArrayLikeObject from './isArrayLikeObject.js'
 import last from './last.js'
 
@@ -33,7 +33,7 @@ function differenceWith(array, ...values) {
     comparator = undefined
   }
 
-  //
+  //baseFlatten用于分离最后一个参数和其余参数（第一个采纳数与除外），将对比回调函数和数组分开
   return isArrayLikeObject(array)
     ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), undefined, comparator)
     : []
