@@ -40,6 +40,7 @@ function baseDifference(array, values, iteratee, comparator) {
   else if (values.length >= LARGE_ARRAY_SIZE) {
     includes = cacheHas
     isCommon = false
+    //SetCache缓存独一无二的值
     values = new SetCache(values)
   }
   outer:
