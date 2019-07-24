@@ -1,4 +1,4 @@
-import baseIsEqual from './.internal/baseIsEqual.js'
+import baseIsEqual from '../.internal/baseIsEqual.js'
 
 /**
  * This method is like `isEqual` except that it accepts `customizer` which
@@ -30,6 +30,8 @@ import baseIsEqual from './.internal/baseIsEqual.js'
  * isEqualWith(array, other, customizer)
  * // => true
  */
+//如果不传入customizer，与isEqual非常相似（几乎一样）
+//value被对比的值，other对比的值
 function isEqualWith(value, other, customizer) {
   customizer = typeof customizer == 'function' ? customizer : undefined
   const result = customizer ? customizer(value, other) : undefined

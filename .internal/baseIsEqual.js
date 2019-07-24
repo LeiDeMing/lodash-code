@@ -1,5 +1,5 @@
 import baseIsEqualDeep from './baseIsEqualDeep.js'
-import isObjectLike from '../isObjectLike.js'
+import isObjectLike from '../core/isObjectLike.js'
 
 /**
  * The base implementation of `isEqual` which supports partial comparisons
@@ -16,12 +16,14 @@ import isObjectLike from '../isObjectLike.js'
  * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
  */
 function baseIsEqual(value, other, bitmask, customizer, stack) {
+  //value被对比值，other对比值，普通对象直接比较
   if (value === other) {
     return true
   }
   if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
     return value !== value && other !== other
   }
+  //对象 运行baseIsEqualDeep，进行深层次比较
   return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack)
 }
 
