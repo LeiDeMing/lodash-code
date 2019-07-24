@@ -27,7 +27,7 @@ function baseDifference(array, values, iteratee, comparator) {
   if (!array.length) {
     return result
   }
-  //如果由iteratee，则过滤函数
+  //如果由iteratee，则过滤函数,differentWith不走此逻辑
   if (iteratee) {
     values = map(values, (value) => iteratee(value))
   }
@@ -57,6 +57,7 @@ function baseDifference(array, values, iteratee, comparator) {
       }
       result.push(value)
     }
+    //如果由comparator将走下面逻辑,运行includes函数
     else if (!includes(values, computed, comparator)) {
       result.push(value)
     }
