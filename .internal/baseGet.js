@@ -10,6 +10,7 @@ import toKey from './toKey.js'
  * @returns {*} Returns the resolved value.
  */
 function baseGet(object, path) {
+  //获取真实路径
   path = castPath(path, object)
 
   let index = 0

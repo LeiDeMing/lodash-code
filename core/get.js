@@ -1,4 +1,4 @@
-import baseGet from './.internal/baseGet.js'
+import baseGet from '../.internal/baseGet.js'
 
 /**
  * Gets the value at `path` of `object`. If the resolved value is
@@ -24,8 +24,11 @@ import baseGet from './.internal/baseGet.js'
  * get(object, 'a.b.c', 'default')
  * // => 'default'
  */
+//获取对象的属性
 function get(object, path, defaultValue) {
+  //object为空，result赋值为undefined，否则调用baseGet
   const result = object == null ? undefined : baseGet(object, path)
+  //result为undefined 则返回defaulValue，否则返回result
   return result === undefined ? defaultValue : result
 }
 
