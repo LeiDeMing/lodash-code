@@ -15,7 +15,7 @@ function baseGet(object, path) {
 
   let index = 0
   const length = path.length
-
+  //循环，获取目标属性
   while (object != null && index < length) {
     object = object[toKey(path[index++])]
   }
