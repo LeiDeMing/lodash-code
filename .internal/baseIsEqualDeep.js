@@ -3,7 +3,7 @@ import equalArrays from './equalArrays.js'
 import equalByTag from './equalByTag.js'
 import equalObjects from './equalObjects.js'
 import getTag from './getTag.js'
-import isBuffer from '../isBuffer.js'
+import isBuffer from '../core/isBuffer.js'
 import isTypedArray from '../isTypedArray.js'
 
 /** Used to compose bitmasks for value comparisons. */
@@ -32,11 +32,13 @@ const hasOwnProperty = Object.prototype.hasOwnProperty
  * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
  */
 function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
+  //判断object和other是否是数组
   let objIsArr = Array.isArray(object)
   const othIsArr = Array.isArray(other)
+  //重写objTag和othTag
   let objTag = objIsArr ? arrayTag : getTag(object)
   let othTag = othIsArr ? arrayTag : getTag(other)
-
+  //如果objTag和othTag为‘[object Arguments]’，则将它们重新赋值为‘[object Object]’
   objTag = objTag == argsTag ? objectTag : objTag
   othTag = othTag == argsTag ? objectTag : othTag
 
