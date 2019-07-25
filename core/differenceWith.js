@@ -33,7 +33,7 @@ function differenceWith(array, ...values) {
     comparator = undefined
   }
 
-  //baseFlatten用于分离最后一个参数和其余参数（第一个采纳数与除外），将对比回调函数和数组分开
+  //baseFlatten用于将比较的多个数组合并成一个数组
   return isArrayLikeObject(array)
     ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), undefined, comparator)
     : []

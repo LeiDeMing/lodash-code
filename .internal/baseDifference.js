@@ -57,7 +57,7 @@ function baseDifference(array, values, iteratee, comparator) {
       }
       result.push(value)
     }
-    //如果由comparator将走下面逻辑,运行includes函数
+    //differentWith直接走这一块逻辑,value(computed)不包含在values，将其push到result中
     else if (!includes(values, computed, comparator)) {
       result.push(value)
     }
