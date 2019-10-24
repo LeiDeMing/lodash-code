@@ -21,7 +21,9 @@ import last from './last.js'
  * unionBy([2.1], [1.2, 2.3], Math.floor)
  * // => [2.1, 1.2]
  */
+  // ...arrays 参数解构赋值
 function unionBy(...arrays) {
+  //iteratee 数组最后一位
   let iteratee = last(arrays)
   if (isArrayLikeObject(iteratee)) {
     iteratee = undefined
