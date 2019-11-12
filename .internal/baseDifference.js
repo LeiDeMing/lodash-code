@@ -36,7 +36,7 @@ function baseDifference(array, values, iteratee, comparator) {
     includes = arrayIncludesWith
     isCommon = false
   }
-  //如果要被比较的数组大于合法数组长度，将cacheHas赋值给includes，isCommon重写为true
+  //比较数组大于200时，性能优化
   else if (values.length >= LARGE_ARRAY_SIZE) {
     includes = cacheHas
     isCommon = false
