@@ -46,6 +46,7 @@ function baseDifference(array, values, iteratee, comparator) {
   outer:
   for (let value of array) {
     // undefined == null result is true
+    //computed为被比较对象
     const computed = iteratee == null ? value : iteratee(value)
 
     value = (comparator || value !== 0) ? value : 0
@@ -59,6 +60,11 @@ function baseDifference(array, values, iteratee, comparator) {
       result.push(value)
     }
     //differentWith直接走这一块逻辑,value(computed)不包含在values，将其push到result中
+    /**
+     * @param {Array} 比较数组
+     * @param {Object} 被比较对象
+     * @param {Function} 传入的方法
+     */
     else if (!includes(values, computed, comparator)) {
       result.push(value)
     }
