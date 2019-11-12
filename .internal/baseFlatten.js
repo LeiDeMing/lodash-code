@@ -18,7 +18,7 @@ function baseFlatten(array, depth, predicate, isStrict, result) {
   if (array == null) {
     return result
   }
-
+  //扁平化数组
   for (const value of array) {
     if (depth > 0 && predicate(value)) {
       if (depth > 1) {
