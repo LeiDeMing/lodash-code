@@ -35,7 +35,9 @@ function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
   //判断object和other是否是数组
   let objIsArr = Array.isArray(object)
   const othIsArr = Array.isArray(other)
-  //重写objTag和othTag
+  /**
+   * getTag 调用Object.prototype.toString.call获取对象类型 
+   */
   let objTag = objIsArr ? arrayTag : getTag(object)
   let othTag = othIsArr ? arrayTag : getTag(other)
   //如果objTag和othTag为‘[object Arguments]’，则将它们重新赋值为‘[object Object]’

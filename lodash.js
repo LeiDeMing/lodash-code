@@ -3290,48 +3290,50 @@
      * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
      */
     function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
-      var objIsArr = isArray(object),
-          othIsArr = isArray(other),
-          objTag = objIsArr ? arrayTag : getTag(object),
-          othTag = othIsArr ? arrayTag : getTag(other);
+      //判断object和other是否是数组
+  let objIsArr = Array.isArray(object)
+  const othIsArr = Array.isArray(other)
+  //重写objTag和othTag
+  let objTag = objIsArr ? arrayTag : getTag(object)
+  let othTag = othIsArr ? arrayTag : getTag(other)
+  //如果objTag和othTag为‘[object Arguments]’，则将它们重新赋值为‘[object Object]’
+  objTag = objTag == argsTag ? objectTag : objTag
+  othTag = othTag == argsTag ? objectTag : othTag
 
-      objTag = objTag == argsTag ? objectTag : objTag;
-      othTag = othTag == argsTag ? objectTag : othTag;
+  let objIsObj = objTag == objectTag
+  const othIsObj = othTag == objectTag
+  const isSameTag = objTag == othTag
 
-      var objIsObj = objTag == objectTag,
-          othIsObj = othTag == objectTag,
-          isSameTag = objTag == othTag;
+  if (isSameTag && isBuffer(object)) {
+    if (!isBuffer(other)) {
+      return false
+    }
+    objIsArr = true
+    objIsObj = false
+  }
+  if (isSameTag && !objIsObj) {
+    stack || (stack = new Stack)
+    return (objIsArr || isTypedArray(object))
+      ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
+      : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack)
+  }
+  if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
+    const objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__')
+    const othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__')
 
-      if (isSameTag && isBuffer(object)) {
-        if (!isBuffer(other)) {
-          return false;
-        }
-        objIsArr = true;
-        objIsObj = false;
-      }
-      if (isSameTag && !objIsObj) {
-        stack || (stack = new Stack);
-        return (objIsArr || isTypedArray(object))
-          ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
-          : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
-      }
-      if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
-        var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-            othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+    if (objIsWrapped || othIsWrapped) {
+      const objUnwrapped = objIsWrapped ? object.value() : object
+      const othUnwrapped = othIsWrapped ? other.value() : other
 
-        if (objIsWrapped || othIsWrapped) {
-          var objUnwrapped = objIsWrapped ? object.value() : object,
-              othUnwrapped = othIsWrapped ? other.value() : other;
-
-          stack || (stack = new Stack);
-          return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
-        }
-      }
-      if (!isSameTag) {
-        return false;
-      }
-      stack || (stack = new Stack);
-      return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
+      stack || (stack = new Stack)
+      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack)
+    }
+  }
+  if (!isSameTag) {
+    return false
+  }
+  stack || (stack = new Stack)
+  return equalObjects(object, other, bitmask, customizer, equalFunc, stack)
     }
 
     /**
