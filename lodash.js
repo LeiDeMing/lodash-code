@@ -2931,26 +2931,25 @@
      * @returns {Array} Returns the new flattened array.
      */
     function baseFlatten(array, depth, predicate, isStrict, result) {
-      var index = -1,
-          length = array.length;
+  result || (result = [])
 
-      predicate || (predicate = isFlattenable);
-      result || (result = []);
-
-      while (++index < length) {
-        var value = array[index];
-        if (depth > 0 && predicate(value)) {
-          if (depth > 1) {
-            // Recursively flatten arrays (susceptible to call stack limits).
-            baseFlatten(value, depth - 1, predicate, isStrict, result);
-          } else {
-            arrayPush(result, value);
-          }
-        } else if (!isStrict) {
-          result[result.length] = value;
-        }
+  if (array == null) {
+    return result
+  }
+  //扁平化数组
+  for (const value of array) {
+    if (depth > 0 && predicate(value)) {
+      if (depth > 1) {
+        // Recursively flatten arrays (susceptible to call stack limits).
+        baseFlatten(value, depth - 1, predicate, isStrict, result)
+      } else {
+        result.push(...value)
       }
-      return result;
+    } else if (!isStrict) {
+      result[result.length] = value
+    }
+  }
+  return result
     }
 
     /**
