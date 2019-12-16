@@ -9,6 +9,7 @@ import isPrototype from './isPrototype.js'
  */
 function initCloneObject(object) {
   return (typeof object.constructor == 'function' && !isPrototype(object))
+  //严格克隆自身继承的prototype
     ? Object.create(Object.getPrototypeOf(object))
     : {}
 }

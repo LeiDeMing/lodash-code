@@ -22,6 +22,7 @@ const CLONE_SYMBOLS_FLAG = 4
  * // => false
  */
 function cloneDeep(value) {
+  //位或运算为5
   return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG)
 }
 
