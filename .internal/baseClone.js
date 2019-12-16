@@ -196,6 +196,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
     }
   }
   // Check for circular references and return its corresponding clone.
+  //不加括号执行class
   stack || (stack = new Stack)
   const stacked = stack.get(value)
   if (stacked) {

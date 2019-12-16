@@ -4,6 +4,7 @@ import MapCache from './MapCache.js'
 /** Used as the size to enable large array optimizations. */
 const LARGE_ARRAY_SIZE = 200
 
+//缓存对象
 class Stack {
 
   /**
